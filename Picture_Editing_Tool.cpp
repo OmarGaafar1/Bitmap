@@ -1,5 +1,5 @@
 // FCI – Programming 1 – 2022 - Assignment 3
-// Program Name: a7a editing tool.cpp
+// Program Name: Picture_Editing_Tool.cpp
 // Last Modification Date: 30/3/2022
 // Author1 and ID and Group: Mohamed Waleed / 20210362 / A
 // Author2 and ID and Group: Omar Gaafar / 2021xxxx / A
@@ -145,6 +145,15 @@ void filterInvertImage(){ // 2
 }
 //___________________________________________________________________
 void flipImage (){ // 4
+    for (int i = 0; i < SIZE; i++){
+        for (int j = 0; j < SIZE; j++){
+            if (i > SIZE/2 - 1)
+                break;
+            int temp = image[i][j];
+            image[i][j] = image[SIZE - i - 1][SIZE - j - 1];
+            image[SIZE - i - 1][SIZE - j - 1] = temp;
+        }
+    }
 }
 //___________________________________________________________________
 void imageEdges(){ // 7
