@@ -1,3 +1,3 @@
 # Bitmap
 
-## Walled  & Gaafar's Production
+## Waleed  & Gaafar's Production
