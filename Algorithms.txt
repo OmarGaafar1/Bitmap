@@ -1,0 +1,81 @@
+### ALGORITHMS FOR THE FILTERS
+
+## Filter 1: Black and White Image
+check every pixel if it is greater than 127(grey) then make it 255(white)
+if smaller than 127 make it black(0)
+
+
+
+## Filter 2: Invert Image
+change every pixel to equal = 255 - pixelvalue
+if pixel value was white then the output is black
+//	       was black then the output is white
+//	       was grey then the output is grey 
+etc.
+
+
+
+## Filter 3: Merge Images
+
+
+
+
+## Filter 4: Flip Image
+interchange the first pixel with the last pixel till they reach
+the middle row in the middle column
+
+
+
+
+## Filter 5: Rotate Image
+
+
+
+
+## Filter 6: Darken and Lighten Image
+in the darkening case, remove half of the value of the pixel with value = value - 0.5* value.
+i.e. value = 200 -> value = 100
+
+in the lightening case, add half of the value of the pixel with value = value + 0.5*(value + 1).
+i.e.  value = 10 -> 15
+
+
+
+
+## Filter 7: Detect Image Edges
+uses the black and white filter then then if the next two colors are of the same color i.e pix1-pix2 = 0
+pix1 becomes black. does the same vertically for the pixels.
+else the pixel becomes white.
+
+
+
+## Filter 8: Enlarge Image
+
+
+
+## Filter 9: Shrink Image
+
+
+
+## Filter a: Mirror Image
+for 1/2 right: change the value of the (1st pixel) with the value of the (1st last pixel of the same row)
+(2nd) pixel with (2nd last) pixel and so on, till we reach the middle column for each row.
+
+for 1/2 left: change the value of the (1st last pixel) with the value of the (1st pixel of the same row)
+(2nd last) pixel with the (2nd) pixel and so on, till we reach the middle column for each row.
+
+for 1/2 up: change the value of the (1st last pixel) with the value of the (1st pixel of the same column)
+(2nd last) pixel with the (2nd) pixel and so on, till we reach the middle row for each column.
+
+for 1/2 down: change the value of the (1st pixel) with the value of the (1st last pixel of the same column)
+(2nd) pixel with the (2nd last) pixel and so on, till we reach the middle row for each column.
+
+
+
+
+## Filter b: Shuffle Image
+
+
+
+
+## Filter c: Blur Image
