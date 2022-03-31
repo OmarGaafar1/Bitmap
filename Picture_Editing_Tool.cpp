@@ -1,6 +1,6 @@
 // FCI – Programming 1 – 2022 - Assignment 3
 // Program Name: Picture_Editing_Tool.cpp
-// Last Modification Date: 30/3/2022
+// Last Modification Date: 31/3/2022
 // Author1 and ID and Group: Mohamed Waleed / 20210362 / A
 // Author2 and ID and Group: Omar Gaafar / 2021xxxx / A
 // Author3 and ID and Group: xxxxx xxxxx
@@ -65,11 +65,11 @@ int main()
             break;
         case '5':
             loadImage();
-            //rotateImage ();
+            filterLuminance ();
             break;
         case '6':
             loadImage();
-            //filterLuminance ();
+            //rotateImage ();
             break;
         case '7':
             loadImage();
@@ -156,6 +156,37 @@ void flipImage (){ // 4
     }
 }
 //___________________________________________________________________
+void filterLuminance(){ // 5
+    char input;
+    cout << "Do you want to (d)arken or (l)ighten?" << endl;
+    cin >> input;
+    switch(input){
+        // darkening works
+        case 'd':
+            for (int i = 0; i < SIZE; i++){
+                for (int j = 0; j < SIZE; j++){
+                    image[i][j] =  image[i][j] - 0.5*image[i][j];
+                }
+            }
+            break;
+        // lightnening doesnt work??
+        case 'l':
+            for (int i = 0; i < SIZE; i++){
+                for (int j = 0; j < SIZE; j++){
+                    int temp = image[i][j];
+                    image[i][j] = image[i][j] + 0.5*image[i][j] ;
+                    if (temp > image[i][j])
+                        image[i][j] = 256 - image[i][j];
+                }
+            }
+            break;
+        default:
+            cout << "Invalid input, please try again." << endl;
+            break;
+    }
+    
+}
+//___________________________________________________________________
 void imageEdges(){ // 7
 }
 //___________________________________________________________________
@@ -206,3 +237,13 @@ void imageMirror(){ // a
             break;
     }
 }
+//___________________________________________________________________
+void imageBlur(){
+    unsigned char blurImage[SIZE/2][SIZE/2];
+    for (int i = 0; i < SIZE/2; i++){
+                for (int j = 0; j < SIZE; j++){
+                    blurImage[i][j] = image[i+1][j+1];
+                }
+    }
+}
+//
