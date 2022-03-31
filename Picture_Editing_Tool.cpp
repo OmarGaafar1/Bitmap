@@ -237,13 +237,12 @@ void imageMirror(){ // a
             break;
     }
 }
-//___________________________________________________________________
-void imageBlur(){
-    unsigned char blurImage[SIZE/2][SIZE/2];
-    for (int i = 0; i < SIZE/2; i++){
-                for (int j = 0; j < SIZE; j++){
-                    blurImage[i][j] = image[i+1][j+1];
-                }
-    }
-}
-//
+
+
+
+
+
+
+
+
+
