@@ -38,6 +38,8 @@ void imageBlur (); // c
 int main()
 {
     cout << "Ahlan ya user ya habibi :)" << endl;
+    loadImage();
+
     while (true)
     {
         char input;
@@ -50,51 +52,39 @@ int main()
         switch (input)
         {
         case '1':
-            loadImage();
             filterBW();
             break;
         case '2':
-            loadImage();
             filterInvertImage ();
             break;
         case '3':
-            loadImage();
             //mergeImage ();
             break;
         case '4':
-            loadImage();
             flipImage();
             break;
         case '5':
-            loadImage();
             rotateImage ();
             break;
         case '6':
-            loadImage();
             filterLuminance ();
             break;
         case '7':
-            loadImage();
             imageEdges ();
             break;
         case '8':
-            loadImage();
             imageEnlarge ();                  
             break;
         case '9':
-            loadImage();
             //imageShrink ();
             break;
         case 'a':
-            loadImage();
             imageMirror ();
             break;
         case 'b':
-            loadImage();
             //imageShuffle ();
             break;
         case 'c':
-            loadImage();
             //imageBlur ();
             break;
         case 's':
