@@ -38,10 +38,11 @@ void imageBlur (); // c
 int main()
 {
     cout << "Ahlan ya user ya habibi :)" << endl;
-    loadImage();
     while (true)
     {
         char input;
+        loadImage();
+
         cout << "Please select a filter to apply or 0 to exit: " << endl;
         cout << " 1- Black & White Filter\n 2- Invert Filter\n 3- Merge Filter\n 4- Flip Image\n 5- Rotate Image\n";
         cout << " 6- Darken and Lighten Image\n 7- Detect Image Edges\n 8- Enlarge Image\n 9- Shrink Image\n a- Mirror 1/2 Image\n";
@@ -122,6 +123,7 @@ void saveImage (){
 }
 //___________________________________________________________________
 void filterBW(){ // 1 done
+
     for (int i = 0; i < SIZE; i++){
         for(int j = 0; j < SIZE; j++){
             if (image[i][j] > 127)
@@ -133,12 +135,14 @@ void filterBW(){ // 1 done
 }
 //___________________________________________________________________
 void filterInvertImage(){ // 2 done
+
     for (int i = 0; i < SIZE; i++)
         for (int j = 0; j< SIZE; j++)
             image[i][j] = 255 - image[i][j];
 }
 //___________________________________________________________________
 void flipImage (){ // 4  done
+
     for (int i = 0; i < SIZE; i++){
         for (int j = 0; j < SIZE; j++){
             if (i > SIZE/2 - 1)
@@ -151,6 +155,7 @@ void flipImage (){ // 4  done
 }
 //___________________________________________________________________
 void rotateImage(){ // 5 Done !
+
     unsigned char rotated[256][256];
     int x =0 , y=255 ,rotation; 
     cout <<"To rotate image 90-Degree Enter '1'\nTo rotate image 180-Degree Enter '2'\nTo rotate image 270-Degree Enter '3': ";
@@ -175,37 +180,7 @@ void rotateImage(){ // 5 Done !
 }
 //___________________________________________________________________
 void filterLuminance(){ // 6 done
-    char input;
-    cout << "Do you want to (d)arken or (l)ighten?" << endl;
-    cin >> input;
-    switch(input){
-        // darkening works
-        case 'd':
-            for (int i = 0; i < SIZE; i++){
-                for (int j = 0; j < SIZE; j++){
-                    image[i][j] =  image[i][j] - 0.5*image[i][j];
-                }
-            }
-            break;
-        // lightnening works
-        case 'l':
-            for (int i = 0; i < SIZE; i++){
-                for (int j = 0; j < SIZE; j++){
-                    int temp = image[i][j];
-                    image[i][j] = image[i][j] + 0.5*(image[i][j] + 1) ;
-                    if (temp > image[i][j])
-                        image[i][j] = 256 - image[i][j];
-                }
-            }
-            break;
-        default:
-            cout << "Invalid input, please try again." << endl;
-            break;
-    }
-    
-}
-//___________________________________________________________________
-void filterLuminance(){ // 6 done
+
     char input;
     cout << "Do you want to (d)arken or (l)ighten?" << endl;
     cin >> input;
@@ -238,6 +213,7 @@ void filterLuminance(){ // 6 done
 //___________________________________________________________________
 void imageEdges(){ // 7 works but not the best
     filterBW();
+
     for (int i = 0; i < SIZE; i++){
         for (int j = 0; j < SIZE; j++){
             if (image[i][j+1] - image[i][j] != 0)
@@ -259,6 +235,7 @@ void imageEnlarge(){ // 8 In progress
 
 //___________________________________________________________________
 void imageMirror(){ // a  done
+
     char input;
     cout << "Mirror (l)eft, (r)ight, (u)pper, (d)own side?" << endl;
     cin >> input;
