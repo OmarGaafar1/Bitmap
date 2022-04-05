@@ -65,10 +65,6 @@ int main()
             rotateImage ();
             break;
         case '6':
-<<<<<<< HEAD
-=======
-            loadImage();
->>>>>>> 0b042984c1eda9a238ade874d03abe3b9042d978
             filterLuminance ();
             break;
         case '7':
@@ -153,7 +149,6 @@ void flipImage (){ // 4  done
     }
 }
 //___________________________________________________________________
-<<<<<<< HEAD
 void rotateImage(){ // 5 Done !
     unsigned char rotated[256][256];
     int x =0 , y=255 ,rotation; 
@@ -209,7 +204,6 @@ void filterLuminance(){ // 6 done
     
 }
 //___________________________________________________________________
-=======
 void filterLuminance(){ // 6 done
     char input;
     cout << "Do you want to (d)arken or (l)ighten?" << endl;
@@ -241,7 +235,6 @@ void filterLuminance(){ // 6 done
     
 }
 //___________________________________________________________________
->>>>>>> 0b042984c1eda9a238ade874d03abe3b9042d978
 void imageEdges(){ // 7 works but not the best
     filterBW();
     for (int i = 0; i < SIZE; i++){
@@ -256,7 +249,6 @@ void imageEdges(){ // 7 works but not the best
         }
     }
 }
-<<<<<<< HEAD
 
 //___________________________________________________________________
 void imageEnlarge(){ // 8 In progress
@@ -264,9 +256,6 @@ void imageEnlarge(){ // 8 In progress
 }
 
 
-
-=======
->>>>>>> 0b042984c1eda9a238ade874d03abe3b9042d978
 //___________________________________________________________________
 void imageMirror(){ // a  done
     char input;
