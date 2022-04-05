@@ -41,8 +41,6 @@ int main()
     while (true)
     {
         char input;
-        loadImage();
-
         cout << "Please select a filter to apply or 0 to exit: " << endl;
         cout << " 1- Black & White Filter\n 2- Invert Filter\n 3- Merge Filter\n 4- Flip Image\n 5- Rotate Image\n";
         cout << " 6- Darken and Lighten Image\n 7- Detect Image Edges\n 8- Enlarge Image\n 9- Shrink Image\n a- Mirror 1/2 Image\n";
@@ -52,39 +50,51 @@ int main()
         switch (input)
         {
         case '1':
+            loadImage();
             filterBW();
             break;
         case '2':
+            loadImage();
             filterInvertImage ();
             break;
         case '3':
+            loadImage();
             //mergeImage ();
             break;
         case '4':
+            loadImage();
             flipImage();
             break;
         case '5':
+            loadImage();
             rotateImage ();
             break;
         case '6':
+            loadImage();
             filterLuminance ();
             break;
         case '7':
+            loadImage();
             imageEdges ();
             break;
         case '8':
+            loadImage();
             imageEnlarge ();                  
             break;
         case '9':
+            loadImage();
             //imageShrink ();
             break;
         case 'a':
+            loadImage();
             imageMirror ();
             break;
         case 'b':
+            loadImage();
             //imageShuffle ();
             break;
         case 'c':
+            loadImage();
             //imageBlur ();
             break;
         case 's':
