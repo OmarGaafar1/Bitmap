@@ -81,7 +81,6 @@ int main()
             imageMirror ();
             break;
         case 'b':
-            cout << int(image[0][0]) << " " << int(image[0][1]) << " " << int(image[0][2]);
             //imageShuffle ();
             break;
         case 'c':
@@ -217,76 +216,6 @@ void imageEdges(){ // 7 works but not the best
         }
     }
 }
-
-//___________________________________________________________________
-void imageEnlarge(){ // 8 In progress
-    unsigned char H_blur[256][256],V_blur[256][256] ;
-    int   average, sum ,average_2 , sum_2;
-    for (int i = 0; i < SIZE; i++)
-    {   
-        
-        average = (image[i][0] + image[i][1]+ image[i][2]+ image[i][3] + image[i][4]+ image[i][5]) /6;
-        sum = average;
-        //cout << "averag is " <<sum << endl;
-        for (int j = 0; j < SIZE; j++)
-        {   
-            if (j > 253)
-            {
-                H_blur[i][j] = image[i][j];
-                continue;
-            }
-            
-            H_blur[i][j] = sum;
-            //cout << int(image[i][j])<<" " ;
-            sum= sum  - int((image[i][j])/6) + int((image[i][j+6])/6);
-            //cout << i << " " << j << " " << "sum is "<< sum << endl;
-        }
-        //cout << "---------------------" << endl << "start ";
-   }
-
-
-
-    for (int i = 0; i < SIZE; i++)
-    {   
-
-        average_2 = (H_blur[0][i] + H_blur[1][i] +  H_blur[2][i]+ H_blur[3][i] +  H_blur[4][i]+ H_blur[5][i]) / 6 ;
-        sum_2 = average_2;
-       // cout << "The average is "<< sum_2<< endl;
-        for (int j = 0; j < SIZE; j++)
-        {   
-            //cout << j << " " << i<< endl;
-           V_blur[j][i] = sum_2;
-           sum_2 = sum_2 - int ((H_blur[j][i])/6) +  int ((H_blur[j+6][i])/6) ;
-        
-           //cout  << j << " " << i << "  "<< sum_2 << endl;
-        
-        }
-
-        //cout << "---------------------" << endl;
-    }
-    
-    for (int i = 0; i < SIZE; i++)
-    {             
-
-        for (int j = 0; j < SIZE; j++)
-        {   
-           image[i][j] = V_blur[i][j];
-        }
-
-    }
-
-
-
-
-
-
-
-
-
-
-
-}
-
 
 //___________________________________________________________________
 void imageMirror(){ // a  done
