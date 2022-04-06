@@ -39,14 +39,13 @@ int main()
 {
     cout << "Ahlan ya user ya habibi :)" << endl;
     loadImage();
-
     while (true)
     {
         char input;
         cout << "Please select a filter to apply or 0 to exit: " << endl;
         cout << " 1- Black & White Filter\n 2- Invert Filter\n 3- Merge Filter\n 4- Flip Image\n 5- Rotate Image\n";
         cout << " 6- Darken and Lighten Image\n 7- Detect Image Edges\n 8- Enlarge Image\n 9- Shrink Image\n a- Mirror 1/2 Image\n";
-        cout << " b- Shuffle Image\n c- Blur Image\n s- Save the image to a file\n 0- Exit\n";
+        cout << " b- Shuffle Image\n c- Blur Image\n s- Save the image to a file\n r- Enter a new image\n 0- Exit\n";
         cin >> input;
 
         switch (input)
@@ -73,7 +72,7 @@ int main()
             imageEdges ();
             break;
         case '8':
-            imageEnlarge ();                  
+            //imageEnlarge ();                  
             break;
         case '9':
             //imageShrink ();
@@ -82,27 +81,25 @@ int main()
             imageMirror ();
             break;
         case 'b':
+            cout << int(image[0][0]) << " " << int(image[0][1]) << " " << int(image[0][2]);
             //imageShuffle ();
             break;
         case 'c':
-            //imageBlur ();
+            imageBlur ();
             break;
         case 's':
             saveImage();
+            break;
+        case 'r':
+            loadImage();
             break;
         case '0':
             return 0;
         default:
             cout << "Invalid input, please try again.\n" << endl;
             break;        
-                
-
-
         }
-
-
-    }
-    
+    }            
 }
 
 //___________________________________________________________________
@@ -123,7 +120,6 @@ void saveImage (){
 }
 //___________________________________________________________________
 void filterBW(){ // 1 done
-
     for (int i = 0; i < SIZE; i++){
         for(int j = 0; j < SIZE; j++){
             if (image[i][j] > 127)
@@ -135,14 +131,12 @@ void filterBW(){ // 1 done
 }
 //___________________________________________________________________
 void filterInvertImage(){ // 2 done
-
     for (int i = 0; i < SIZE; i++)
         for (int j = 0; j< SIZE; j++)
             image[i][j] = 255 - image[i][j];
 }
 //___________________________________________________________________
 void flipImage (){ // 4  done
-
     for (int i = 0; i < SIZE; i++){
         for (int j = 0; j < SIZE; j++){
             if (i > SIZE/2 - 1)
@@ -155,7 +149,6 @@ void flipImage (){ // 4  done
 }
 //___________________________________________________________________
 void rotateImage(){ // 5 Done !
-
     unsigned char rotated[256][256];
     int x =0 , y=255 ,rotation; 
     cout <<"To rotate image 90-Degree Enter '1'\nTo rotate image 180-Degree Enter '2'\nTo rotate image 270-Degree Enter '3': ";
@@ -180,7 +173,6 @@ void rotateImage(){ // 5 Done !
 }
 //___________________________________________________________________
 void filterLuminance(){ // 6 done
-
     char input;
     cout << "Do you want to (d)arken or (l)ighten?" << endl;
     cin >> input;
@@ -213,7 +205,6 @@ void filterLuminance(){ // 6 done
 //___________________________________________________________________
 void imageEdges(){ // 7 works but not the best
     filterBW();
-
     for (int i = 0; i < SIZE; i++){
         for (int j = 0; j < SIZE; j++){
             if (image[i][j+1] - image[i][j] != 0)
@@ -229,13 +220,76 @@ void imageEdges(){ // 7 works but not the best
 
 //___________________________________________________________________
 void imageEnlarge(){ // 8 In progress
+    unsigned char H_blur[256][256],V_blur[256][256] ;
+    int   average, sum ,average_2 , sum_2;
+    for (int i = 0; i < SIZE; i++)
+    {   
+        
+        average = (image[i][0] + image[i][1]+ image[i][2]+ image[i][3] + image[i][4]+ image[i][5]) /6;
+        sum = average;
+        //cout << "averag is " <<sum << endl;
+        for (int j = 0; j < SIZE; j++)
+        {   
+            if (j > 253)
+            {
+                H_blur[i][j] = image[i][j];
+                continue;
+            }
+            
+            H_blur[i][j] = sum;
+            //cout << int(image[i][j])<<" " ;
+            sum= sum  - int((image[i][j])/6) + int((image[i][j+6])/6);
+            //cout << i << " " << j << " " << "sum is "<< sum << endl;
+        }
+        //cout << "---------------------" << endl << "start ";
+   }
+
+
+
+    for (int i = 0; i < SIZE; i++)
+    {   
+
+        average_2 = (H_blur[0][i] + H_blur[1][i] +  H_blur[2][i]+ H_blur[3][i] +  H_blur[4][i]+ H_blur[5][i]) / 6 ;
+        sum_2 = average_2;
+       // cout << "The average is "<< sum_2<< endl;
+        for (int j = 0; j < SIZE; j++)
+        {   
+            //cout << j << " " << i<< endl;
+           V_blur[j][i] = sum_2;
+           sum_2 = sum_2 - int ((H_blur[j][i])/6) +  int ((H_blur[j+6][i])/6) ;
+        
+           //cout  << j << " " << i << "  "<< sum_2 << endl;
+        
+        }
+
+        //cout << "---------------------" << endl;
+    }
     
+    for (int i = 0; i < SIZE; i++)
+    {             
+
+        for (int j = 0; j < SIZE; j++)
+        {   
+           image[i][j] = V_blur[i][j];
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+
+
 }
 
 
 //___________________________________________________________________
 void imageMirror(){ // a  done
-
     char input;
     cout << "Mirror (l)eft, (r)ight, (u)pper, (d)own side?" << endl;
     cin >> input;
@@ -283,3 +337,37 @@ void imageMirror(){ // a  done
     }
 }
 //___________________________________________________________________
+void imageBlur(){ // c   Done!
+    unsigned char H_blur[256][256],V_blur[256][256] ;
+    int   average, sum ,average_2 , sum_2;
+    for (int i = 0; i < SIZE; i++)
+    {   
+        
+        average = (image[i][0] + image[i][1]+ image[i][2]+ image[i][3] + image[i][4]+ image[i][5]) /6;
+        sum = average;
+        for (int j = 0; j < SIZE; j++)
+        {   
+            H_blur[i][j] = sum;
+            sum= sum  - int((image[i][j])/6) + int((image[i][j+6])/6);
+        }
+   }
+
+    for (int i = 0; i < SIZE; i++)
+    {   
+        average_2 = (H_blur[0][i] + H_blur[1][i] +  H_blur[2][i]+ H_blur[3][i] +  H_blur[4][i]+ H_blur[5][i]) / 6 ;
+        sum_2 = average_2;
+        for (int j = 0; j < SIZE; j++)
+        { 
+           V_blur[j][i] = sum_2;
+           sum_2 = sum_2 - int ((H_blur[j][i])/6) +  int ((H_blur[j+6][i])/6) ;
+        }
+    }
+    
+    for (int i = 0; i < SIZE; i++)
+    {             
+        for (int j = 0; j < SIZE; j++)
+        {   
+           image[i][j] = V_blur[i][j];
+        }
+    }
+}
