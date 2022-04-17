@@ -28,6 +28,19 @@ the middle row in the middle column
 
 
 ## Filter 5: Rotate Image
+	if we considered a picture is a matrix 3x3 [ 1, 2, 3     if we want to rotate it 90 degree we need it to be in this form >> [ 7, 4,  1  
+                                                     4, 5 ,6                                                                          8, 5 , 2              
+                                                     7, 8 ,9 ]                                                                        9, 6 , 3]
+
+
+pixel at [0][0] ,must be at [0][2].   pixel at [0][1], must be at [1][2] . pixel at [0][2] , must be at [2][2]
+
+if we want to rotate it 180 or 270 we could repeat this process. Twice to get 180 degree , or three times to get 270 degree.
+
+Applying the above algorithm on a 256 x 256 matrix.
+
+
+
 
 
 
@@ -79,3 +92,42 @@ for 1/2 down: change the value of the (1st pixel) with the value of the (1st las
 
 
 ## Filter c: Blur Image
+        if we considered a picture is a matrix 3x3 [ 1, 2, 3    , To Blur the image we need to get for each pixel the average with its corrosponding pixels
+                                                     4, 5 ,6                          
+                                                     7, 8 ,9 ]                                                                
+
+
+for pixel at [0][0] = 1 , we get the average with its adjacent pixels . Average_1 = (1+ 2+ 4 + 5) / 4
+for pixel at [0][1] = 2 , we get the average with its adjacent pixels . Average_2 = 
+for pixel at [0][2] = 1 , we get the average with its adjacent pixels . Average_3 = 
+ 
+
+so for the blur image , its [0][0] will be equal to Average_1
+so for the blur image , its [0][1] will be equal to Average_2
+so for the blur image , its [0][2] will be equal to Average_3 
+And so on .....
+
+Apllying the above algorithm on a 256 x 256 matrix.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

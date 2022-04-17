@@ -39,14 +39,13 @@ int main()
 {
     cout << "Ahlan ya user ya habibi :)" << endl;
     loadImage();
-
     while (true)
     {
         char input;
         cout << "Please select a filter to apply or 0 to exit: " << endl;
         cout << " 1- Black & White Filter\n 2- Invert Filter\n 3- Merge Filter\n 4- Flip Image\n 5- Rotate Image\n";
         cout << " 6- Darken and Lighten Image\n 7- Detect Image Edges\n 8- Enlarge Image\n 9- Shrink Image\n a- Mirror 1/2 Image\n";
-        cout << " b- Shuffle Image\n c- Blur Image\n s- Save the image to a file\n 0- Exit\n";
+        cout << " b- Shuffle Image\n c- Blur Image\n s- Save the image to a file\n r- Enter a new image\n 0- Exit\n";
         cin >> input;
 
         switch (input)
@@ -73,7 +72,7 @@ int main()
             imageEdges ();
             break;
         case '8':
-            imageEnlarge ();                  
+            //imageEnlarge ();                  
             break;
         case '9':
             //imageShrink ();
@@ -82,27 +81,24 @@ int main()
             imageMirror ();
             break;
         case 'b':
-            //imageShuffle ();
+            imageShuffle ();
             break;
         case 'c':
-            //imageBlur ();
+            imageBlur ();
             break;
         case 's':
             saveImage();
+            break;
+        case 'r':
+            loadImage();
             break;
         case '0':
             return 0;
         default:
             cout << "Invalid input, please try again.\n" << endl;
             break;        
-                
-
-
         }
-
-
-    }
-    
+    }            
 }
 
 //___________________________________________________________________
@@ -123,7 +119,6 @@ void saveImage (){
 }
 //___________________________________________________________________
 void filterBW(){ // 1 done
-
     for (int i = 0; i < SIZE; i++){
         for(int j = 0; j < SIZE; j++){
             if (image[i][j] > 127)
@@ -135,14 +130,12 @@ void filterBW(){ // 1 done
 }
 //___________________________________________________________________
 void filterInvertImage(){ // 2 done
-
     for (int i = 0; i < SIZE; i++)
         for (int j = 0; j< SIZE; j++)
             image[i][j] = 255 - image[i][j];
 }
 //___________________________________________________________________
 void flipImage (){ // 4  done
-
     for (int i = 0; i < SIZE; i++){
         for (int j = 0; j < SIZE; j++){
             if (i > SIZE/2 - 1)
@@ -155,7 +148,6 @@ void flipImage (){ // 4  done
 }
 //___________________________________________________________________
 void rotateImage(){ // 5 Done !
-
     unsigned char rotated[256][256];
     int x =0 , y=255 ,rotation; 
     cout <<"To rotate image 90-Degree Enter '1'\nTo rotate image 180-Degree Enter '2'\nTo rotate image 270-Degree Enter '3': ";
@@ -180,7 +172,6 @@ void rotateImage(){ // 5 Done !
 }
 //___________________________________________________________________
 void filterLuminance(){ // 6 done
-
     char input;
     cout << "Do you want to (d)arken or (l)ighten?" << endl;
     cin >> input;
@@ -213,7 +204,6 @@ void filterLuminance(){ // 6 done
 //___________________________________________________________________
 void imageEdges(){ // 7 works but not the best
     filterBW();
-
     for (int i = 0; i < SIZE; i++){
         for (int j = 0; j < SIZE; j++){
             if (image[i][j+1] - image[i][j] != 0)
@@ -228,14 +218,7 @@ void imageEdges(){ // 7 works but not the best
 }
 
 //___________________________________________________________________
-void imageEnlarge(){ // 8 In progress
-    
-}
-
-
-//___________________________________________________________________
 void imageMirror(){ // a  done
-
     char input;
     cout << "Mirror (l)eft, (r)ight, (u)pper, (d)own side?" << endl;
     cin >> input;
@@ -282,4 +265,364 @@ void imageMirror(){ // a  done
             break;
     }
 }
+
+
 //___________________________________________________________________
+void imageShuffle () // b Done
+{   
+    unsigned char part_1[128][128],part_2[128][128],part_3[128][128],part_4[128][128];
+
+    // First Quarter in the Image
+    for (int i = 0; i < 128; i++)
+    {
+        for (int j = 0; j < 128; j++)
+        {
+            part_1[i][j] = image[i][j];
+
+        }
+    }
+    // Second Quarter in the Image
+    int p=0 , l=0;
+    for (int i = 0; i < 128; i++)
+    {
+        for (int j = 128; j < 256; j++)
+        {
+            part_2[p][l++] = image[i][j];
+
+        }
+        p++;
+        l =0;
+        
+    }
+
+   // Third Quarter in the image
+    int z=0 , a=0;
+    for (int i = 128; i < 256; i++)
+    {
+        for (int j = 0; j < 128; j++)
+        {
+            part_3[z][a++] = image[i][j];
+
+        }
+        z++;
+        a =0;
+        
+    }
+
+    // Forth Quarter in the Image
+    int f=0 , d=0;
+    for (int i = 128; i < 256; i++)
+    {
+        for (int j = 128; j < 256; j++)
+        {
+            part_4[f][d++] = image[i][j];
+
+        }
+        f++;
+        d =0;
+        
+    }
+    int ord_1 ,ord_2 ,ord_3 , ord_4;
+    cout << "Enter the order of the image: ";
+    cin >> ord_1 >>ord_2 >>ord_3 >> ord_4;
+
+    // First Quarter Iteration  
+    if(ord_1 == 4)  
+
+    {   int x = 0 , y = 0;
+        for (int i = 0; i < 128; i++)
+        {
+            for (int j = 0; j < 128; j++)
+            {   
+                image[i][j] = part_4[x][y++];
+            }
+            x++;
+            y = 0;
+    
+        }
+
+    }
+
+    if(ord_1 == 3)  
+    {   int x = 0 , y = 0;
+        for (int i = 0; i < 128; i++)
+        {
+            for (int j = 0; j < 128; j++)
+            {   
+                image[i][j] = part_3[x][y++];
+            }
+            x++;
+            y = 0;
+    
+        }
+
+    }
+
+    if(ord_1 == 2)  
+    {   int x = 0 , y = 0;
+        for (int i = 0; i < 128; i++)
+        {
+            for (int j = 0; j < 128; j++)
+            {   
+                image[i][j] = part_2[x][y++];
+            }
+            x++;
+            y = 0;
+    
+        }
+
+    }
+
+    if(ord_1 == 1)  
+    {   int x = 0 , y = 0;
+        for (int i = 0; i < 128; i++)
+        {
+            for (int j = 0; j < 128; j++)
+            {   
+                image[i][j] = part_1[x][y++];
+            }
+            x++;
+            y = 0;
+    
+        }
+
+    }
+    // Second Quarter Iteration 
+    
+    if (ord_2 == 4)
+    {
+        int x = 0 , y = 0;
+        for (int i = 0; i < 128; i++)
+        {
+            for (int j = 128; j < 256; j++)
+            {   
+                image[i][j] = part_4[x][y++];
+            }
+            x++;
+            y = 0;
+            
+        }
+    }
+
+    if (ord_2 == 3)
+    {
+        int x = 0 , y = 0;
+        for (int i = 0; i < 128; i++)
+        {
+            for (int j = 128; j < 256; j++)
+            {   
+                image[i][j] = part_3[x][y++];
+            }
+            x++;
+            y = 0;
+            
+        }
+    }
+
+    if (ord_2 == 2)
+    {
+        int x = 0 , y = 0;
+        for (int i = 0; i < 128; i++)
+        {
+            for (int j = 128; j < 256; j++)
+            {   
+                image[i][j] = part_2[x][y++];
+            }
+            x++;
+            y = 0;
+            
+        }
+    }
+
+    if (ord_2 == 1)
+    {
+        int x = 0 , y = 0;
+        for (int i = 0; i < 128; i++)
+        {
+            for (int j = 128; j < 256; j++)
+            {   
+                image[i][j] = part_1[x][y++];
+            }
+            x++;
+            y = 0;
+            
+        }
+    }
+    
+        
+    // Third Quarter Iteration
+    
+    if (ord_3 == 4)
+    {
+        int x = 0 , y = 0;
+        for (int i = 128; i < 256; i++)
+        {
+            for (int j = 0; j < 128; j++)
+            {   
+                image[i][j] = part_4[x][y++];
+            }
+            x++;
+            y = 0;
+            
+        }
+    }
+
+    if (ord_3 == 3)
+    {
+        int x = 0 , y = 0;
+        for (int i = 128; i < 256; i++)
+        {
+            for (int j = 0; j < 128; j++)
+            {   
+                image[i][j] = part_3[x][y++];
+            }
+            x++;
+            y = 0;
+            
+        }
+    }
+
+    if (ord_3 == 2)
+    {
+        int x = 0 , y = 0;
+        for (int i = 128; i < 256; i++)
+        {
+            for (int j = 0; j < 128; j++)
+            {   
+                image[i][j] = part_2[x][y++];
+            }
+            x++;
+            y = 0;
+            
+        }
+    }
+
+    if (ord_3 == 1)
+    {
+        int x = 0 , y = 0;
+        for (int i = 128; i < 256; i++)
+        {
+            for (int j = 0; j < 128; j++)
+            {   
+                image[i][j] = part_1[x][y++];
+            }
+            x++;
+            y = 0;
+            
+        }
+    }
+    
+    
+    
+    
+    // Fourth Quarter Iteration
+
+    if (ord_4 == 4)
+    {
+        int x = 0 , y = 0;
+        for (int i = 128; i < 256; i++)
+        {
+            for (int j = 128; j < 256; j++)
+            {   
+                image[i][j] = part_4[x][y++];
+            }
+            x++;
+            y = 0;
+            
+        }
+    }
+
+    if (ord_4 == 3)
+    {
+        int x = 0 , y = 0;
+        for (int i = 128; i < 256; i++)
+        {
+            for (int j = 128; j < 256; j++)
+            {   
+                image[i][j] = part_3[x][y++];
+            }
+            x++;
+            y = 0;
+            
+        }
+    }
+
+    if (ord_4 == 2)
+    {
+        int x = 0 , y = 0;
+        for (int i = 128; i < 256; i++)
+        {
+            for (int j = 128; j < 256; j++)
+            {   
+                image[i][j] = part_2[x][y++];
+            }
+            x++;
+            y = 0;
+            
+        }
+    }
+
+    if (ord_4 == 1 )
+    {
+        int x = 0 , y = 0;
+        for (int i = 128; i < 256; i++)
+        {
+            for (int j = 128; j < 256; j++)
+            {   
+                image[i][j] = part_1[x][y++];
+            }
+            x++;
+            y = 0;
+            
+        }
+    }
+    
+        
+
+
+
+
+
+
+
+
+
+
+}
+
+
+//___________________________________________________________________
+void imageBlur(){ // c   Done!
+    unsigned char H_blur[256][256],V_blur[256][256] ;
+    int   average, sum ,average_2 , sum_2;
+    for (int i = 0; i < SIZE; i++)
+    {   
+        
+        average = (image[i][0] + image[i][1]+ image[i][2]+ image[i][3] + image[i][4]+ image[i][5]) /6;
+        sum = average;
+        for (int j = 0; j < SIZE; j++)
+        {   
+            H_blur[i][j] = sum;
+            sum= sum  - int((image[i][j])/6) + int((image[i][j+6])/6);
+        }
+   }
+
+    for (int i = 0; i < SIZE; i++)
+    {   
+        average_2 = (H_blur[0][i] + H_blur[1][i] +  H_blur[2][i]+ H_blur[3][i] +  H_blur[4][i]+ H_blur[5][i]) / 6 ;
+        sum_2 = average_2;
+        for (int j = 0; j < SIZE; j++)
+        { 
+           V_blur[j][i] = sum_2;
+           sum_2 = sum_2 - int ((H_blur[j][i])/6) +  int ((H_blur[j+6][i])/6) ;
+        }
+    }
+    
+    for (int i = 0; i < SIZE; i++)
+    {             
+        for (int j = 0; j < SIZE; j++)
+        {   
+           image[i][j] = V_blur[i][j];
+        }
+    }
+}
