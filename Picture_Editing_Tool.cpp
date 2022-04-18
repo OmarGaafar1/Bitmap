@@ -1,11 +1,11 @@
 // FCI – Programming 1 – 2022 - Assignment 3
 // Program Name: Picture_Editing_Tool.cpp
-// Last Modification Date: 31/3/2022
+// Last Modification Date: 18/4/2022
 // Author1 and ID and Group: Mohamed Waleed  /  20210362 / A
 // Author2 and ID and Group: Omar Gaafar     /  20210263 / A
 // Author3 and ID and Group: Sahar Mohamed   /  20211049 / A
-// Teaching Assistant: xxxxx xxxxx
-// Purpose:..........
+// Teaching Assistant: Eng. Mahmoud Fateaha
+// Purpose: Grey Scale 256x256 image editor
 
 
 #include <iostream>
