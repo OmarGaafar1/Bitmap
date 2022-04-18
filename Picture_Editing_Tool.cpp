@@ -1,9 +1,9 @@
 // FCI – Programming 1 – 2022 - Assignment 3
 // Program Name: Picture_Editing_Tool.cpp
 // Last Modification Date: 31/3/2022
-// Author1 and ID and Group: Mohamed Waleed / 20210362 / A
-// Author2 and ID and Group: Omar Gaafar / 2021xxxx / A
-// Author3 and ID and Group: xxxxx xxxxx
+// Author1 and ID and Group: Mohamed Waleed  /  20210362 / A
+// Author2 and ID and Group: Omar Gaafar     /  20210263 / A
+// Author3 and ID and Group: Sahar Mohamed   /  20211049 / A
 // Teaching Assistant: xxxxx xxxxx
 // Purpose:..........
 
@@ -57,7 +57,7 @@ int main()
             filterInvertImage ();
             break;
         case '3':
-            //mergeImage ();
+            mergeImage ();
             break;
         case '4':
             flipImage();
@@ -72,10 +72,10 @@ int main()
             imageEdges ();
             break;
         case '8':
-            //imageEnlarge ();                  
+            imageEnlarge ();                  
             break;
         case '9':
-            //imageShrink ();
+            imageShrink ();
             break;
         case 'a':
             imageMirror ();
@@ -134,6 +134,24 @@ void filterInvertImage(){ // 2 done
         for (int j = 0; j< SIZE; j++)
             image[i][j] = 255 - image[i][j];
 }
+//____________________________________________________________________
+void mergeImage(){ // 3 done
+    unsigned char imageMerge[SIZE][SIZE];
+    char imageFileName[999];
+    cout << "Please enter file name of the image to merge: ";
+    cin >> imageFileName;
+    strcat(imageFileName,".bmp");
+    readGSBMP(imageFileName, imageMerge);
+    for (int i = 0; i < SIZE; i++){
+        for (int j = 0; j < SIZE; j++){
+            int avg = (imageMerge[i][j] + image[i][j]) / 2;
+            image[i][j] = avg;
+        }
+    }
+}
+
+
+
 //___________________________________________________________________
 void flipImage (){ // 4  done
     for (int i = 0; i < SIZE; i++){
@@ -217,6 +235,316 @@ void imageEdges(){ // 7 works but not the best
     }
 }
 
+
+
+//___________________________________________________________________
+void imageEnlarge()
+{
+
+unsigned char part_1[128][128],part_2[128][128],part_3[128][128],part_4[128][128];
+
+
+    // First Quarter in the Image
+    for (int i = 0; i < 128; i++)
+    {
+        for (int j = 0; j < 128; j++)
+        {
+            part_1[i][j] = image[i][j];
+
+        }
+    }
+    // Second Quarter in the Image
+    int p=0 , l=0;
+    for (int i = 0; i < 128; i++)
+    {
+        for (int j = 128; j < 256; j++)
+        {
+            part_2[p][l++] = image[i][j];
+
+        }
+        p++;
+        l =0;
+        
+    }
+
+   // Third Quarter in the image
+    int z=0 , a=0;
+    for (int i = 128; i < 256; i++)
+    {
+        for (int j = 0; j < 128; j++)
+        {
+            part_3[z][a++] = image[i][j];
+
+        }
+        z++;
+        a =0;
+        
+    }
+
+    // Forth Quarter in the Image
+    int f=0 , d=0;
+    for (int i = 128; i < 256; i++)
+    {
+        for (int j = 128; j < 256; j++)
+        {
+            part_4[f][d++] = image[i][j];
+
+        }
+        f++;
+        d =0;
+        
+    }
+    int selection ;
+    cout << "Enter Which Part you want to Enlarge: ";
+    cin >> selection;
+
+    if (selection == 1)
+    {
+        int k = 0 , q = 0;
+     int kk = 1 , qq = 0;
+     int kkk = 0 , qqq = 1;
+     int kkkk = 1 , qqqq = 1;
+        for (int i = 0; i < 128; i++)
+        {
+            for (int j = 0; j < 128; j++)
+            {   
+                image[k][q] = part_1[i][j];
+                image[kk][qq] = part_1[i][j];
+                image[kkk][qqq] = part_1[i][j];     
+                image[kkkk][qqqq] = part_1[i][j];
+
+                q+= 2;
+                qq+= 2;
+                qqq+= 2;
+                qqqq+= 2 ;
+
+            }
+            q= 0;
+            qq= 0;
+            qqq = 1;
+            qqqq = 1;
+
+            k+= 2;
+            kk += 2;
+            kkk += 2;
+            kkkk += 2;
+        }
+    }
+
+    if (selection == 2)
+    {
+         int k = 0 , q = 0;
+     int kk = 1 , qq = 0;
+     int kkk = 0 , qqq = 1;
+     int kkkk = 1 , qqqq = 1;
+        for (int i = 0; i < 128; i++)
+        {
+            for (int j = 0; j < 128; j++)
+            {   
+                image[k][q] = part_2[i][j];
+                image[kk][qq] = part_2[i][j];
+                image[kkk][qqq] = part_2[i][j];     
+                image[kkkk][qqqq] = part_2[i][j];
+
+                q+= 2;
+                qq+= 2;
+                qqq+= 2;
+                qqqq+= 2 ;
+
+            }
+            q= 0;
+            qq= 0;
+            qqq = 1;
+            qqqq = 1;
+
+            k+= 2;
+            kk += 2;
+            kkk += 2;
+            kkkk += 2;
+        }
+    }
+    
+    if (selection == 3)
+    {
+        int k = 0 , q = 0;
+     int kk = 1 , qq = 0;
+     int kkk = 0 , qqq = 1;
+     int kkkk = 1 , qqqq = 1;
+        for (int i = 0; i < 128; i++)
+        {
+            for (int j = 0; j < 128; j++)
+            {   
+                image[k][q] = part_3[i][j];
+                image[kk][qq] = part_3[i][j];
+                image[kkk][qqq] = part_3[i][j];     
+                image[kkkk][qqqq] = part_3[i][j];
+
+                q+= 2;
+                qq+= 2;
+                qqq+= 2;
+                qqqq+= 2 ;
+
+            }
+            q= 0;
+            qq= 0;
+            qqq = 1;
+            qqqq = 1;
+
+            k+= 2;
+            kk += 2;
+            kkk += 2;
+            kkkk += 2;
+        }
+    }
+
+    if (selection == 4)
+    {
+         int k = 0 , q = 0;
+     int kk = 1 , qq = 0;
+     int kkk = 0 , qqq = 1;
+     int kkkk = 1 , qqqq = 1;
+        for (int i = 0; i < 128; i++)
+        {
+            for (int j = 0; j < 128; j++)
+            {   
+                image[k][q] = part_4[i][j];
+                image[kk][qq] = part_4[i][j];
+                image[kkk][qqq] = part_4[i][j];     
+                image[kkkk][qqqq] = part_4[i][j];
+
+                q+= 2;
+                qq+= 2;
+                qqq+= 2;
+                qqqq+= 2 ;
+
+            }
+            q= 0;
+            qq= 0;
+            qqq = 1;
+            qqqq = 1;
+
+            k+= 2;
+            kk += 2;
+            kkk += 2;
+            kkkk += 2;
+        }
+    }
+    
+
+    
+
+}
+
+
+
+//___________________________________________________________________
+void imageShrink(){ // 9 Done !
+    
+    unsigned char H_blur[256][256],V_blur[256][256] ;
+    int   average, sum ,average_2 , sum_2;
+
+
+    for (int i = 0; i < SIZE; i++)
+    {   
+        
+        average = (image[i][0] + image[i][1]+ image[i][2]) /3;
+        sum = average;
+        for (int j = 0; j < SIZE; j++)
+        {   
+            H_blur[i][j] = sum;
+            sum= sum  - int((image[i][j])/3) + int((image[i][j+3])/3);
+        }
+    
+    }
+    for (int i = 0; i < SIZE; i++)
+    {   
+        average_2 = (H_blur[0][i] + H_blur[1][i] +  H_blur[2][i]) / 3 ;
+        sum_2 = average_2;
+        for (int j = 0; j < SIZE; j++)
+        { 
+           V_blur[j][i] = sum_2;
+           sum_2 = sum_2 - int ((H_blur[j][i])/3) +  int ((H_blur[j+3][i])/3) ;
+        }
+    }
+
+
+    for (int i = 0; i < SIZE; i++)
+    {             
+        for (int j = 0; j < SIZE; j++)
+        {   
+            image[i][j] = 255;
+        }
+    }
+    int selection ;
+    cout << "Please Choose What dimensions you want\n";
+    cout << "Enter 1 for 1/2 the original dimension: \nEnter 2 for 1/3 the original dimension: \nEnter 3 for 1/4 the original dimension: ";
+    cout << endl;
+    cin >> selection;
+
+    if (selection == 1)
+    {
+        int k = 2, p=2;
+        for (int i = 0; i < 128; i++)
+        {   
+                    
+            for (int j = 0; j < 128; j++)
+            {   
+                
+                
+                
+                image[i][j] = V_blur[k][p];
+                p += 2;
+                
+            }
+            k+=2 , p=2;
+        }
+    }
+    
+    if (selection == 2)
+    {
+        int k = 3, p=3;
+        for (int i = 0; i < 86; i++)
+        {   
+                    
+            for (int j = 0; j < 86; j++)
+            {   
+                
+                
+                
+                image[i][j] = V_blur[k][p];
+                p += 3;
+                
+            }
+            k+=3 , p=3;
+        }
+    }
+
+        if (selection == 3)
+    {
+        int k = 4, p=4;
+        for (int i = 0; i < 64; i++)
+        {   
+                    
+            for (int j = 0; j < 64; j++)
+            {   
+                
+                
+                
+                image[i][j] = V_blur[k][p];
+                p += 4;
+                
+            }
+            k+=4 , p=4;
+        }
+    }
+        else
+        {
+            cout << "Invalid input ";
+        }
+        
+
+
+}
 //___________________________________________________________________
 void imageMirror(){ // a  done
     char input;
@@ -577,16 +905,6 @@ void imageShuffle () // b Done
         }
     }
     
-        
-
-
-
-
-
-
-
-
-
 
 }
 
