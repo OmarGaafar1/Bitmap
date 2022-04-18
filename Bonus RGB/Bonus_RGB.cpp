@@ -1,11 +1,10 @@
 // FCI – Programming 1 – 2022 - Assignment 3
 // Program Name: Picture_Editing_Tool.cpp
 // Last Modification Date: 17/4/2022
-// Author1 and ID and Group: Mohamed Waleed / 20210362 / A
-// Author2 and ID and Group: Omar Gaafar / 2021xxxx / A
-// Author3 and ID and Group: xxxxx xxxxx
+// Author1 and ID and Group: Mohamed Waleed  /  20210362 / A
+// Author2 and ID and Group: Omar Gaafar     /  20210263 / A
+// Author3 and ID and Group: Sahar Mohamed   /  20211049 / A
 // Teaching Assistant: xxxxx xxxxx
-
 // Purpose:RGB 256x256 image editor
 
 #include <iostream>
@@ -181,7 +180,7 @@ void flipImage (){ // 4  done
     }
 }
 //___________________________________________________________________
-void rotateImage(){ // 5 gets more blurry as the rotations increases
+void rotateImage(){ // 5 done
 
     unsigned char rotated[256][256][3];
     int x =0 , y=255 ,rotation; 
@@ -261,8 +260,7 @@ void imageEdges(){ // 7 done
     }
 }
 //___________________________________________________________________
-void imageEnlarge()
-{
+void imageEnlarge(){ // 8 done
 
     unsigned char part_1[128][128][3],part_2[128][128][3],part_3[128][128][3],part_4[128][128][3];
     int selection ;
@@ -456,7 +454,7 @@ void imageEnlarge()
     }
 }
 //___________________________________________________________________
-void imageShrink(){ // 9 Done !
+void imageShrink(){ // 9 done
     
     unsigned char H_blur[256][256][3],V_blur[256][256][3];
     int   average, sum ,average_2 , sum_2;
@@ -561,7 +559,7 @@ void imageShrink(){ // 9 Done !
     }            
 }  
 //___________________________________________________________________
-void imageMirror(){ // a  done
+void imageMirror(){ // a done
 
     char input;
     cout << "Mirror (l)eft, (r)ight, (u)pper, (d)own side?" << endl;
@@ -618,7 +616,7 @@ void imageMirror(){ // a  done
     }
 }
 //___________________________________________________________________
-void imageShuffle () // b Done
+void imageShuffle () // b done
 {   
     
     unsigned char part_1[128][128][RGB],part_2[128][128][RGB],part_3[128][128][RGB],part_4[128][128][RGB];
@@ -932,7 +930,7 @@ void imageShuffle () // b Done
     }
 }
 //___________________________________________________________________
-void imageBlur(){ // c  Done
+void imageBlur(){ // c done
     unsigned char H_blur[256][256][3],V_blur[256][256][3] ;
     int   average, sum ,average_2 , sum_2;
     for (int k = 0; k < RGB; k++){
