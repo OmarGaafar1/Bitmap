@@ -64,10 +64,16 @@ else the pixel becomes white.
 
 ## Filter 8: Enlarge Image
 
+We will seperate each quarter of the image in a seperate array[128][128] . Thus we have 4 arrays containg the 4 parts of the image.
+Then the user enters which part he wants to enlarge. We will have then to display the [128][128]array on a 256x256 image.
+To do so some pixels will remain unmatched , so we will have to do more iretations to fill the unfilled pixels.
+
+
 
 
 ## Filter 9: Shrink Image
-
+First, we will have to get a 3x3 average for each pixel. Then we will need to display a 256x256 image in 128x128, 86x86 and 64x64 according to the user's input.
+To do so , we will have to skip 2 pixels in case of 128x128 and skip 3 pixels in case of 86x86 and skip 4 pixels in case of 64x64.
 
 
 ## Filter a: Mirror Image
@@ -87,7 +93,8 @@ for 1/2 down: change the value of the (1st pixel) with the value of the (1st las
 
 
 ## Filter b: Shuffle Image
-
+We will seperate each quarter of the image in a seperate array[128][128] . Thus we have 4 arrays containg the 4 parts of the image.
+According to the user's input , the image will be formed . If user enters (2 3 4 1), therefor the first quarter of the image will contain part_2 and second quarter of the image will contain part_3 and third quarter of the image will contain part_4, and fourth quarter of the image will contain part_1
 
 
 
